@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demostración de XSS</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Demostración de XSS</h1>
+    <form action="/comment" method="POST">
+        <textarea name="comment" placeholder="Escribe un comentario..." required></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+    <form action="/delete" method="POST">
+        <button type="submit" style="background-color: black; color: white; padding: 5px; border: none; cursor: pointer;">
+            Borrar Comentarios
+        </button>
+    </form>    
+    <h2>Comentarios:</h2>
+    <ul>
+        <% comments.forEach(comment => { %>
+            <li><%- comment %></li> <!-- Aquí está la vulnerabilidad XSS -->
+        <% }); %>
+    </ul>
+</body>
+</html>
