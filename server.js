@@ -15,6 +15,26 @@ app.get("/", (req, res) => {
     res.render("index", { comments });
 });
 
+/*
+function escapeHTML(str) {
+return str.replace(/[&<>"']/g, function (char) {
+    const escapeChars = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    };
+    return escapeChars[char];
+});
+}
+
+app.get("/xss", (req, res) => {
+    const message = escapeHTML(req.query.msg || "");
+    res.send(`<h1>Mensaje recibido:</h1><p>${message}</p>`);
+});
+*/
+
 app.get("/xss", (req, res) => {
     const message = req.query.msg || ""; // Obtiene el parámetro "msg" de la URL
     res.send(`<h1>Mensaje recibido:</h1><p>${message}</p>`);
@@ -37,3 +57,4 @@ app.post("/delete", (req, res) => {
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
+
