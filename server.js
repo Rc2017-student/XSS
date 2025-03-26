@@ -17,23 +17,26 @@ app.get("/", (req, res) => {
 
 /*
 function escapeHTML(str) {
-return str.replace(/[&<>"']/g, function (char) {
-    const escapeChars = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-    };
-    return escapeChars[char];
-});
+    return String(str).replace(/[&<>"'/]/g, function (char) {
+        const escapeChars = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;',
+            "/": '&#x2F;'
+        };
+        return escapeChars[char] || char;
+    });
 }
 
 app.get("/xss", (req, res) => {
     const message = escapeHTML(req.query.msg || "");
     res.send(`<h1>Mensaje recibido:</h1><p>${message}</p>`);
 });
+
 */
+
 
 app.get("/xss", (req, res) => {
     const message = req.query.msg || ""; // Obtiene el parámetro "msg" de la URL
